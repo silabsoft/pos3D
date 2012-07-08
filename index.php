@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title></title>
+        <script src="jquery.js" type="text/javascript"></script>
+        <script src="POS3D.js" type="text/javascript"></script>
+
+        <script src="Vertex.js" type="text/javascript"></script>
+        <script src="Face.js" type="text/javascript"></script>
+        <script src="Model.js" type="text/javascript"></script>
+        <script src="Matrix.js" type="text/javascript"></script>
+        <script src="Render.js" type="text/javascript"></script>
+    </head>
+    <body onload="POS3D.Render.init()">
+        <div id="canvas">
+            <canvas width="400" height="400" id="renderCanvas"></canvas>
+
+        </div>
+    </body>
+</html>
