@@ -1,31 +1,45 @@
-POS3D.Vertex = function(a,s,d){
-    const x = a;
-    const y = s;
-    const z = d;
+POS3D.Vertex = (function(){
+    function Vertex(x,y,z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.add = function(v) {
+            return new POS3D.Vertex(x + v.x, y + v.y, z + v.z);
+        }
+
+        this.subtract = function(v) {
+            return new POS3D.Vertex(x - v.x, y - v.y, z - v.z);
+        }
+
+        this.multiply = function(i) {
+            return new POS3D.Vertex(x * i, y * i, z * i);
+        }
+
+        this.divide = function(i) {
+            return new POS3D.Vertex(x / i, y / i, z / i);
+        }
+
+        this.getDotProduct = function(v) {
+            return x * v.x + y * v.y + z * v.z;
+        }
+
+        this.crossProduct = function(v) {
+            return new POS3D.Vertex(y * v.z - z * v.y, z * v.x - x * v.z, x * v.y - y * v.x);
+        }
+
+        this.getMagnitude = function(){
+            return Math.sqrt(x * x + y * y + z * z);
+        }
+
+        this.normalize = function(){
+            var mag = this.getMagnitude();
+            return new POS3D.Vertex(x / mag, y / mag, z / mag);
+        }
     
-
-    this.substract = function(a,b){
-        return new POS3D.Vertex(a.getX()-b.getX(),a.getY()-b.getY(),a.getZ()-b.getZ());
+        this.toString = function(){
+            return "Vertex: ["+x+","+y+ ","+z+"]";
+        }
+        
     }
-
-    this.crossProduct = function(v,v1){
-        return new POS3D.Vertex(v.getY() * v1.getZ() - v.getZ() * v1.getY(), v.getZ() * v1.getX() - v.getX() * v1.getZ(), v.getX() * v1.getY() - v.getY() * v1.getX());
-    }
-    this.getLength = function(v){
-        return (v.getX() * v.getX() + v.getY() * v.getY() + v.getZ() * v.getZ()) /2;
-    }      
-       
-    this.getX = function(){
-        return x;
-    }    
-    this.getY = function(){
-        return y;
-    }
-    this.getZ = function(){
-        return z;
-    }
-
-    this.toString = function(){
-        return "Vertex: ["+x+","+y+ ","+z+"]";
-    }
-}
+    return Vertex;
+})();

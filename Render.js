@@ -1,6 +1,6 @@
 POS3D.Render = function(){
     const TICK = 60.0;
-    var model = new POS3D.Model(0,0,0,
+    var model = new POS3D.Model(0,0,100,
         [
         new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(1, 1, 0),new POS3D.Vertex(1, 0, 0)],"#FF0000"),
         new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(0, 1, 0),new POS3D.Vertex(1, 1, 0)],"#00FFFF"),
@@ -23,6 +23,7 @@ POS3D.Render = function(){
     var canvasX;
     var canvasY; 
     var planeNormal;
+    var pov;
     
     return {
         init: function() { 
@@ -34,10 +35,11 @@ POS3D.Render = function(){
             context = canvas.getContext('2d');
             setTimeout(POS3D.Render.loop, (1/TICK) * 1000);
             planeNormal= new POS3D.Vertex(0,0,0);
+          
             model.getTransform().translate(100, 100, 0);
             model.getTransform().scale(50,50, 1);   
-            modelb.getTransform().translate(200, 200, 0);
-            modelb.getTransform().scale(50,50, 1);
+          //  pov = new POS3D.Matrix();
+           // poVertex(0, 0, 50)
             
         },
         loop: function() { 
@@ -49,7 +51,7 @@ POS3D.Render = function(){
   
             model.getTransform().rotateY(0.017);
             model.getTransform().rotateX(-0.017);
- 
+            
         },
         draw: function(){ 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -104,21 +106,30 @@ POS3D.Render = function(){
             var v = faces[i].getVerticies();
             for(var x = 0; x < v.length; x++){
                 
-                context.lineTo(v[x].getX(),v[x].getY()); 
+                context.lineTo(projectionX(pov,v[x]),projectionY(pov,v[x])); 
         
                 
  
             }
+         
             context.fillText("Priority:"+i,350,50+(i*12));  
         
             context.fill();
 
-            context.closePath();           
+            context.closePath();  
+            
+        
             context.translate(-startX, -startY);
 
         }
 
     }
+    function projectionX(pov,vX){
+        return (pov.getZ() * (vX.getX()-pov.getZ())) / (pov.getZ() + vX.getZ()) + pov.getX();
+    }
+    function projectionY(pov,vX){
+        return (pov.getZ() * (vX.getY()-pov.getY())) / (pov.getZ() + vX.getZ()) + pov.getY();
+    }   
     function toRad(Value) {
         /** Converts numeric degrees to radians */
         return Value * Math.PI / 180;

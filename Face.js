@@ -1,25 +1,26 @@
-POS3D.Face = function(verts,c){
-    const verticies = verts;
-    const color = c;
-    this.getVerticies = function(){
-        return verticies;
-    }
-    this.applyTransform = function(m,f){
-        var verts = [];
-        var fVerts = f.getVerticies();
-        for(var i = 0; i < fVerts.length; i++){
-           
-            verts[i] = m.applyTransform(m,fVerts[i]);
+POS3D.Face = (function(){
+    function Face(v, c){
+        this.verticies =v;
+        this.color = c;
+        
+        this.getVerticies = function(){
+            return this.verticies;
         }
-       return new POS3D.Face(verts,f.getColor());
+        this.applyTransform = function(m){
+            var verts = [];
+            for(var i = 0; i < this.verticies.length; i++){
+           
+                verts[i] = m.applyTransform(m,this.verticies);
+            }
+            return new POS3D.Face(verts,this.color);
+        }
+        this.getColor = function(){
+            return this.color;
+        }
+        this.getNormal = function(){
+            return  this.verticies[0].crossProduct( Vertex().substract(this.verticies[0], this.verticies[1]), Vertex().substract(this.verticies[2], this.verticies[1]));
+        }
     }
-    this.getColor = function(){
-        return color;
-    }
-    this.getNormal = function(){
-       return  verticies[0].crossProduct( verticies[0].substract(verticies[0], verticies[1]), verticies[0].substract(verticies[2], verticies[1]));
-    }
-}
-
-
+    return Face;
+})();
 
