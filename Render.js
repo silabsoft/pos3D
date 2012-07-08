@@ -34,8 +34,9 @@ POS3D.Render = function(){
             canvasY = $('#renderCanvas').offset().top;
             context = canvas.getContext('2d');
             setTimeout(POS3D.Render.loop, (1/TICK) * 1000);
-            planeNormal= new POS3D.Vertex(0,0,0);
-          
+            planeNormal= new POS3D.Vertex(1,1,1);
+          console.log(planeNormal.toString());
+       
             model.getTransform().translate(100, 100, 0);
             model.getTransform().scale(50,50, 1);   
           //  pov = new POS3D.Matrix();

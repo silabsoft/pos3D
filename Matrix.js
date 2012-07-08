@@ -15,6 +15,7 @@ POS3D.Matrix = (function() {
         matrix[1][1] = 1;
         matrix[2][2] = 1;
         matrix[3][3] = 1;   
+        
         this.multiply = function (b) {
             var n = [];
             for(var i = 0; i < 4; i++){
@@ -34,12 +35,13 @@ POS3D.Matrix = (function() {
             var trans
             = [[1, 0, 0, x],[0, 1, 0, y], [0, 0, 1, z],[0, 0, 0, 1]];
             this.multiply(trans);
-        }   
+        } 
         
         this.scale = function(x,y,z) {
             var trans = [[x, 0, 0, 0], [0, y, 0, 0],[0, 0, z, 0],[0, 0, 0, 1]];
             this.multiply(trans);
         } 
+            
         this.rotateX = function(theta) {
             var cos = Math.cos(theta);
             var sin = Math.sin(theta);
@@ -51,6 +53,7 @@ POS3D.Matrix = (function() {
             ];
             this.multiply(trans);
         }
+            
         this.rotateY = function(theta) {
             var cos = Math.cos(theta);
             var sin = Math.sin(theta);
@@ -61,19 +64,23 @@ POS3D.Matrix = (function() {
             [0, 0, 0, 1]
             ]
             this.multiply(trans);
-        }
-        this.getMatrix = function(){
-            return matrix;
-        }
-        this.applyTransform = function(v) {
-            var x = (v.getX() *matrix[0][0]) + (v.getY() *matrix[0][1]) + (v.getZ() *matrix[0][2]) + (matrix[0][3]);
-            var y = (v.getX() *matrix[1][0]) + (v.getY() *matrix[1][1]) + (v.getZ() *matrix[1][2]) + (matrix[1][3]);
-            var z = (v.getX() *matrix[2][0]) + (v.getY() *matrix[2][1]) + (v.getZ() *matrix[2][2]) + (matrix[2][3]);
-            return new POS3D.Vertex(x, y, z);
-        }
+        }    
+        return{
+
+        
+            getMatrix: function(){
+                return matrix;
+            }
+            ,
+            applyTransform : function(v) {
+                var x = (v.getX() *matrix[0][0]) + (v.getY() *matrix[0][1]) + (v.getZ() *matrix[0][2]) + (matrix[0][3]);
+                var y = (v.getX() *matrix[1][0]) + (v.getY() *matrix[1][1]) + (v.getZ() *matrix[1][2]) + (matrix[1][3]);
+                var z = (v.getX() *matrix[2][0]) + (v.getY() *matrix[2][1]) + (v.getZ() *matrix[2][2]) + (matrix[2][3]);
+                return new POS3D.Vertex(x, y, z);
+            }
 
        
+        }
     }
-
     return Matrix;
 })();
