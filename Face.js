@@ -6,17 +6,21 @@ POS3D.Face = (function(){
     }
     Face.prototype.applyTransform = function(m){
         for(var i = 0; i < this.verticies.length; i++){
-            POS3D.Matrix.applyTransform(m,this.verticies);
+         
+            this.verticies[i] =   m.applyTransform(this.verticies[i]);
+       
         }
+        return new POS3D.Face(this.verticies,this.color);
     }
     Face.prototype.getNormal = function(){
         return  POS3D.Vector.crossProduct( POS3D.Vector.subtract(this.verticies[0], this.verticies[1]), POS3D.Vector.subtract(this.verticies[2], this.verticies[1]));
     }
     Face.applyTransform = function(f,m){
+      
         var verts = [];
         for(var i = 0; i < f.verticies.length; i++){
            
-            verts[i] = POS3D.Matrix.applyTransform(m,f.verticies);
+            verts[i] = POS3D.Matrix.applyTransform(m,f.verticies[i]);
         }
         return new POS3D.Face(verts,f.color);
     }
