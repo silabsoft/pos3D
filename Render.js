@@ -1,19 +1,19 @@
 POS3D.Render = function(){
     const TICK = 60.0;
-    var model = new POS3D.Model(0,0,100,
+    var model = new POS3D.Model(new POS3D.Vector(0,0,100),
         [
-        new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(1, 1, 0),new POS3D.Vertex(1, 0, 0)],"#FF0000"),
-        new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(0, 1, 0),new POS3D.Vertex(1, 1, 0)],"#00FFFF"),
-        new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(0, 1, 1),new POS3D.Vertex(0, 1, 0)],"#0000FF"),
-        new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(0, 0, 1),new POS3D.Vertex(0, 1, 1)],"#0000A0"),
-        new POS3D.Face([new POS3D.Vertex(0, 1, 0),new POS3D.Vertex(1, 1, 1),new POS3D.Vertex(1, 1, 0)],"#ADD8E6"),
-        new POS3D.Face([new POS3D.Vertex(0, 1, 0),new POS3D.Vertex(0, 1, 1),new POS3D.Vertex(1, 1, 1)],"#800080"),   
-        new POS3D.Face([new POS3D.Vertex(1, 0, 0),new POS3D.Vertex(1, 1, 0),new POS3D.Vertex(1, 1, 1)],"#FFFF00"),  
-        new POS3D.Face([new POS3D.Vertex(0, 1, 0),new POS3D.Vertex(1, 1, 1),new POS3D.Vertex(1, 0, 1)],"#00FF00"),  
-        new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(1, 0, 0),new POS3D.Vertex(1, 0, 1)],"#FF00FF"),
-        new POS3D.Face([new POS3D.Vertex(0, 0, 0),new POS3D.Vertex(1, 0, 1),new POS3D.Vertex(0, 0, 1)],"#FF00FF"), 
-        new POS3D.Face([new POS3D.Vertex(0, 0, 1),new POS3D.Vertex(1, 0, 1),new POS3D.Vertex(1, 1, 1)],"#000000"),   
-        new POS3D.Face([new POS3D.Vertex(0, 0, 1),new POS3D.Vertex(1, 1, 1),new POS3D.Vertex(0, 1, 1)],"#FFA500")   
+        new POS3D.Face([new POS3D.Vector(0, 0, 0),new POS3D.Vector(50, 50, 0),new POS3D.Vector(50, 0, 0)],"#FF0000"),
+        new POS3D.Face([new POS3D.Vector(0, 0, 0),new POS3D.Vector(0, 50, 0),new POS3D.Vector(50, 50, 0)],"#00FFFF"),
+        new POS3D.Face([new POS3D.Vector(0, 0, 0),new POS3D.Vector(0, 50, 50),new POS3D.Vector(0, 50, 0)],"#0000FF"),
+        new POS3D.Face([new POS3D.Vector(0, 0, 0),new POS3D.Vector(0, 0, 50),new POS3D.Vector(0, 50, 50)],"#0000A0"),
+        new POS3D.Face([new POS3D.Vector(0, 50, 0),new POS3D.Vector(50, 50, 50),new POS3D.Vector(50, 50, 0)],"#ADD8E6"),
+        new POS3D.Face([new POS3D.Vector(0, 50, 0),new POS3D.Vector(0, 50, 50),new POS3D.Vector(50, 50, 50)],"#800080"),   
+        new POS3D.Face([new POS3D.Vector(50, 0, 0),new POS3D.Vector(50, 50, 0),new POS3D.Vector(50, 50, 50)],"#FFFF00"),  
+        new POS3D.Face([new POS3D.Vector(0, 50, 0),new POS3D.Vector(50, 50, 50),new POS3D.Vector(50, 0, 50)],"#00FF00"),  
+        new POS3D.Face([new POS3D.Vector(0, 0, 0),new POS3D.Vector(50, 0, 0),new POS3D.Vector(50, 0, 50)],"#FF00FF"),
+        new POS3D.Face([new POS3D.Vector(0, 0, 0),new POS3D.Vector(50, 0, 50),new POS3D.Vector(0, 0, 50)],"#FF00FF"), 
+        new POS3D.Face([new POS3D.Vector(0, 0, 50),new POS3D.Vector(50, 0, 50),new POS3D.Vector(50, 50, 50)],"#000000"),   
+        new POS3D.Face([new POS3D.Vector(0, 0, 50),new POS3D.Vector(50, 50, 50),new POS3D.Vector(0, 50, 50)],"#FFA500")   
         ]
         );
         
@@ -34,13 +34,12 @@ POS3D.Render = function(){
             canvasY = $('#renderCanvas').offset().top;
             context = canvas.getContext('2d');
             setTimeout(POS3D.Render.loop, (1/TICK) * 1000);
-            planeNormal= new POS3D.Vertex(1,1,1);
-          console.log(planeNormal.toString());
+            planeNormal = new POS3D.Vector(0,0,0);
        
-            model.getTransform().translate(100, 100, 0);
-            model.getTransform().scale(50,50, 1);   
-          //  pov = new POS3D.Matrix();
-           // poVertex(0, 0, 50)
+            model.transform.translate(100, 100, 0);
+        //model.getTransform.scale(50,50, 1);   
+        //  pov = new POS3D.Matrix();
+        // poVector(0, 0, 50)
             
         },
         loop: function() { 
@@ -50,8 +49,8 @@ POS3D.Render = function(){
         },
         update: function() {
   
-            model.getTransform().rotateY(0.017);
-            model.getTransform().rotateX(-0.017);
+          //  model.transform.rotateY(0.017);
+         //   model.transform.rotateX(-0.017);
             
         },
         draw: function(){ 
@@ -59,36 +58,28 @@ POS3D.Render = function(){
             context.fillStyle= "#C0C0C0";
             context.fillRect(0,0,canvasWidth,canvasHeight);
             if(model != null){
-                drawModel(model.transformFaces(model.getTransform(), model));
+                model.transformFaces();
+                drawModel(model);
                 
             }
         }
     };
     
-    function getLocation(mod){
-        
-        return 	{
-            'x': (model.getX() + model.getZ()), 
-            'y': (model.getY() + model.getZ())
-        };
-
-    }
     function drawModel(m){
        
-        var location = getLocation(m);
-        var startX = location['x'];
-        var startY = location['y'];
-        var faces = m.getFaces();
+        var startX = m.vector.x+m.vector.z;
+        var startY = m.vector.y+m.vector.z;
+        var faces = m.faces;
         faces.sort(function(f0,f1){
             //sort method by veer Note: possible issues due to lack of full perspective implementation. 
-            var v0 = f0.getVerticies();
-            var v1 = f1.getVerticies();
+            var v0 = f0.verticies;
+            var v1 = f1.verticies;
             var sum_z0 = 0;
             for (var x = 0; x < v0.length; ++x)
-                sum_z0 += v0[x].getZ();
+                sum_z0 += v0[x].z;
             var sum_z1 = 0;
             for (var x = 0; x < v1.length; ++x)
-                sum_z1 += v1[x].getZ();
+                sum_z1 += v1[x].z;
             return sum_z0 - sum_z1;      
             
      
@@ -97,17 +88,17 @@ POS3D.Render = function(){
         
         for (var i = 0; i < faces.length; i++) {
         
-            if (dotProduct(faces[i].getNormal(),planeNormal) < 0)
+            if (POS3D.Vector.dotProduct(faces[i].getNormal,planeNormal) < 0)
                 continue;
          
           
-            context.fillStyle  = faces[i].getColor();
+            context.fillStyle  = faces[i].color;
             context.translate(startX, startY);
             context.beginPath();
-            var v = faces[i].getVerticies();
+            var v = faces[i].verticies;
             for(var x = 0; x < v.length; x++){
                 
-                context.lineTo(projectionX(pov,v[x]),projectionY(pov,v[x])); 
+                context.lineTo(v[x].x,v[x].y); 
         
                 
  
@@ -136,8 +127,6 @@ POS3D.Render = function(){
         return Value * Math.PI / 180;
     }
  
-    function dotProduct(v,v1){
-        return v.getX() * v1.getX() + v.getY() * v1.getY() + v.getZ() * v1.getZ();
-    }
+
 }();
 
