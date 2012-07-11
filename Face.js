@@ -12,7 +12,7 @@ POS3D.Face = (function(){
         }
         return new POS3D.Face(this.verticies,this.color);
     }
-    Face.prototype.getNormal = function(){
+    Face.prototype.getCenter = function(){
         return  POS3D.Vector.crossProduct( POS3D.Vector.subtract(this.verticies[0], this.verticies[1]), POS3D.Vector.subtract(this.verticies[2], this.verticies[1]));
     }
     Face.applyTransform = function(f,m){
@@ -24,9 +24,10 @@ POS3D.Face = (function(){
         }
         return new POS3D.Face(verts,f.color);
     }
-    Face.getNormal = function(f){
-        return  Vector.crossProduct( Vector.subtract(f.verticies[0], f.verticies[1]), Vector.subtract(f.verticies[2], f.verticies[1]));
-    }
+    Face.getCenter = function(f){
+        return new POS3D.Vector.crossProduct( POS3D.Vector.subtract(f.verticies[0], f.verticies[1]), POS3D.Vector.subtract(f.verticies[2], f.verticies[1]));
+
+ }
     return Face;
 })();
 

@@ -64,6 +64,7 @@ POS3D.Vector = (function() {
         return Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
     }
     Vector.crossProduct = function(v0,v1){
+        
         return new POS3D.Vector(v0.y * v1.z - v0.z * v1.y, v0.z * v1.x - v0.x * v1.z, v0.x * v1.y - v0.y * v1.x);
     }
     Vector.dotProduct = function(v0,v1){
