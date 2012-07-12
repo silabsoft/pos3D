@@ -16,7 +16,7 @@ POS3D.Model = (function() {
     
     }
     Model.prototype.transformThis = function(){
-        POS3D.Matrix.applyTransform(this.transform, this.vector);
+       return new POS3D.Matrix.applyTransform(this.transform, this.vector);
     }
     Model.transformFaces = function(mod){
          
@@ -28,7 +28,7 @@ POS3D.Model = (function() {
     }
     Model.transformThis = function(mod,m){
         var trans = POS3D.Matrix.applyTransform(m, mod.vector);
-        return new POS3D.Model(new Vector(trans.getX(),trans.getY(),trans.getZ()),mod.faces);
+        return new POS3D.Model(new POS3D.Vector(trans.getX(),trans.getY(),trans.getZ()),mod.faces);
     }
 
 
