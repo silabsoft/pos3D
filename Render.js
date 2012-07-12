@@ -9,7 +9,7 @@ POS3D.Render = function(){
     var canvasY; 
     var planeNormal;
     var mod = "teapot.obj";
-    var d = new Date();
+    var test = 0;
     var projection;
     return {
         init: function(mod) { 
@@ -43,10 +43,10 @@ POS3D.Render = function(){
                 }
              
                 model = new POS3D.Model(new POS3D.Vector(0,0,100),f);
-         //       model.transform.rotateY(toRad(90));
+                //       model.transform.rotateY(toRad(90));
                 //   model.transform.rotateX(1.57);
-                model.transform.translate(100, 100, 0);
-                model.transform.scale(10,10, 0);     
+                model.transform.translate(175, 300, 0);
+                model.transform.scale(100,100, 0);     
                 model.transform.rotateX(toRad(180));
                 setTimeout(POS3D.Render.loop, (1/TICK) * 1000);
             });
@@ -58,14 +58,15 @@ POS3D.Render = function(){
             setTimeout(POS3D.Render.loop, (1/TICK) * 1000);
         },
         update: function() {
-      //      projection.
-          //  projection.vector.x++;
-         //   if(projection.vector.z == 200){
-        //        projection.vector.z = 0;
-      //      }
-           // model.transform.rotateY(-0.017);
-           // model.transform.rotateX(0.017);
-           model.transformFaces();
+            //      projection.
+            //  projection.vector.x++;
+            //   if(projection.vector.z == 200){
+            //        projection.vector.z = 0;
+            //      }
+            // model.transform.rotateY(-0.017);
+          
+            model.transform.rotateY(toRad(1));
+            model =  model.transformFaces();
         },
         draw: function(){ 
        

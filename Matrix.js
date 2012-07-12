@@ -17,8 +17,6 @@ POS3D.Matrix = (function() {
         this.d1 = 0;
         this.d2 = 0;
         this.d3 = 1;
-
-     
     }
     Matrix.prototype.multiply = function(tra0, tra1, tra2, tra3, trb0, trb1, trb2, trb3, trc0, trc1, trc2, trc3, trd0, trd1, trd2, trd3, trd4){
         var ta0 = this.a0 * tra0 + this.a1 * trb0 + this.a2 * trc0 + this.a3 * trd0;
@@ -129,9 +127,9 @@ POS3D.Matrix = (function() {
         var ty= (v.x * this.b0) + (v.y * this.b1) + (v.z * this.b2) + (this.b3);
         var tz = (v.x * this.c0) + (v.y * this.c1) + (v.z * this.c2) + (this.c3);
 
-        v.x = tx;
-        v.y = ty;
-        v.z = tz;
+       // v.x = tx;
+      //  v.y = ty;
+      //  v.z = tz;
         return v;
     }
     /*   

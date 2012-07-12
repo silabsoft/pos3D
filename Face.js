@@ -8,12 +8,10 @@ POS3D.Face = (function(){
         var t = [];
         for(var i = 0; i < this.verticies.length; i++){
           
-           t[i] = this.verticies[i].applyTransform(m);
+            t[i] =   this.verticies[i].applyTransform(m);
 
         }
-     this.verticies = t;
-     
-        return this;
+        return new POS3D.Face(t,this.color);
     }
     Face.prototype.getCenter = function(){
         return  POS3D.Vector.crossProduct( POS3D.Vector.subtract(this.verticies[0], this.verticies[1]), POS3D.Vector.subtract(this.verticies[2], this.verticies[1]));

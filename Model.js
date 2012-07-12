@@ -10,10 +10,12 @@ POS3D.Model = (function() {
     
 
     Model.prototype.transformFaces = function(){
+        var f = [this.faces.length];
         for (var i = 0; i < this.faces.length; i++){
-            this.faces[i] = this.faces[i].applyTransform(this.transform);
+            f[i] = this.faces[i].applyTransform(this.transform);
         }
-          this.transform.reset();
+        this.transform.reset();
+        this.faces = f;
         return this;
     
     }
@@ -23,19 +25,7 @@ POS3D.Model = (function() {
     
     
 
-   /* Model.transformFaces = function(mod){
-        var nFaces = [];
-        for (var i = 0; i < mod.faces.length; i++)
-            nFaces[i] =  mod.faces[i].applyTransform(mod.transform);
 
-        return new POS3D.Model(mod.vector,nFaces);  
-    }
-    Model.transformThis = function(mod,m){
-        var trans = POS3D.Matrix.applyTransform(m, mod.vector);
-        return new POS3D.Model(new POS3D.Vector(trans.getX(),trans.getY(),trans.getZ()),mod.faces);
-    }
-
-*/
     return Model;
 })();
 
