@@ -45,8 +45,8 @@ POS3D.Render = function(){
                 model = new POS3D.Model(new POS3D.Vector(0,0,100),f);
          //       model.transform.rotateY(toRad(90));
                 //   model.transform.rotateX(1.57);
-                model.transform.translate(200, 200, 0);
-                model.transform.scale(25,25, 0);     
+                model.transform.translate(100, 100, 0);
+                model.transform.scale(10,10, 0);     
                 model.transform.rotateX(toRad(180));
                 setTimeout(POS3D.Render.loop, (1/TICK) * 1000);
             });
@@ -63,8 +63,9 @@ POS3D.Render = function(){
          //   if(projection.vector.z == 200){
         //        projection.vector.z = 0;
       //      }
-         //   model.transform.rotateY(-0.017);
+           // model.transform.rotateY(-0.017);
            // model.transform.rotateX(0.017);
+           model.transformFaces();
         },
         draw: function(){ 
        
@@ -76,7 +77,7 @@ POS3D.Render = function(){
 
 
                   
-            drawModel(POS3D.Model.transformFaces(model));
+            drawModel(model);
       
         }
     };
