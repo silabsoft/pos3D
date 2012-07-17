@@ -123,14 +123,15 @@ POS3D.Matrix = (function() {
         this.multiply(cos,0,sin,0,0,1,0,0,-sin,0,cos,0,0,0,0,1);
     }
     Matrix.prototype.applyTransform = function(v){
+  
         var tx = (v.x * this.a0) + (v.y * this.a1) + (v.z * this.a2) + (this.a3);
-        var ty= (v.x * this.b0) + (v.y * this.b1) + (v.z * this.b2) + (this.b3);
+        var ty = (v.x * this.b0) + (v.y * this.b1) + (v.z * this.b2) + (this.b3);
         var tz = (v.x * this.c0) + (v.y * this.c1) + (v.z * this.c2) + (this.c3);
 
-       // v.x = tx;
-      //  v.y = ty;
-      //  v.z = tz;
-        return v;
+    // v.x = tx;
+     //   v.y = ty;
+     //   v.z = tz;
+      return new POS3D.Vector(tx,ty,tz);  
     }
     /*   
     Matrix.applyTransform = function(m,v){

@@ -12,11 +12,12 @@ POS3D.Model = (function() {
     Model.prototype.transformFaces = function(){
         var f = [this.faces.length];
         for (var i = 0; i < this.faces.length; i++){
-            f[i] = this.faces[i].applyTransform(this.transform);
+            f[i]=   this.faces[i].applyTransform(this.transform);
         }
-        this.transform.reset();
-        this.faces = f;
-        return this;
+    //  this.faces = f;
+       //this.transform.reset();
+//return this;
+     return new POS3D.Model(this.vector,f);
     
     }
     Model.prototype.transformThis = function(){

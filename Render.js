@@ -22,7 +22,6 @@ POS3D.Render = function(){
             
             planeNormal = new POS3D.Vector(0,0,0);
        
-            projection = new POS3D.Projection(new POS3D.Vector(1,1,1))
             //  pov = new POS3D.Matrix();
             // poVector(0, 0, 50)
             $.get(mod, function(data){
@@ -38,16 +37,17 @@ POS3D.Render = function(){
                     }
                     if(l[0] == "f"){
          
-                        f.push(new POS3D.Face([v[l[1]-1],v[l[2]-1],v[l[3]-1]],null));
+                        f.push(new POS3D.TriFace(v[l[1]-1],v[l[2]-1],v[l[3]-1],null));
                     }
                 }
              
                 model = new POS3D.Model(new POS3D.Vector(0,0,100),f);
                 //       model.transform.rotateY(toRad(90));
                 //   model.transform.rotateX(1.57);
-                model.transform.translate(175, 300, 0);
-                model.transform.scale(100,100, 0);     
-                model.transform.rotateX(toRad(180));
+                model.transform.translate(100,100, 0);
+              model.transform.scale(50,50, 1);     
+           model.transform.rotateX(toRad(180));
+            //    model.transformFaces();
                 setTimeout(POS3D.Render.loop, (1/TICK) * 1000);
             });
 
@@ -63,10 +63,10 @@ POS3D.Render = function(){
             //   if(projection.vector.z == 200){
             //        projection.vector.z = 0;
             //      }
-            // model.transform.rotateY(-0.017);
+             model.transform.rotateY(toRad(5));
           
-            model.transform.rotateY(toRad(1));
-            model =  model.transformFaces();
+      //      model.transform.rotateX(toRad(1));
+    
         },
         draw: function(){ 
        
@@ -77,41 +77,43 @@ POS3D.Render = function(){
      
 
 
-                  
-            drawModel(model);
-      
+   
+            drawModel(model.transformFaces());
+  
         }
     };
     
     function drawModel(m){
- 
+      
         var startX = m.vector.x+m.vector.z;
         var startY = m.vector.y+m.vector.z;
         var faces = m.faces;
         faces.sort(function(f0,f1){
             var v0 = f0.getCenter();
             var v1 = f1.getCenter();
-            return (v0.z - projection.vector.z) - (v1.z - projection.vector.z);      
+            return v0.z - v1.z;
         });
         
         
         for (var i = 0; i < faces.length; i++) {
-            if (POS3D.Vector.dotProduct(faces[i].getCenter,planeNormal) < 0)
+            if (POS3D.Vector.dotProduct(faces[i].getCenter,planeNormal) < 0){
+   
                 continue;
+                
+            }
+               
          
             if(faces[i].color != null)
                 context.fillStyle  = faces[i].color;
             context.translate(startX, startY);
             
             context.beginPath();
-            var v = faces[i].verticies;
-            for(var x = 0; x < v.length; x++){
-              
-                context.lineTo(projection.projectionX(v[x]),projection.projectionY(v[x])); 
+
+            context.lineTo(faces[i].a.x,faces[i].a.y); 
  
-                
- 
-            }
+            context.lineTo(faces[i].b.x,faces[i].b.y); 
+            context.lineTo(faces[i].c.x,faces[i].c.y); 
+            
             if(faces[i].color != null)
                 context.fill(); 
             else{
